@@ -32,7 +32,7 @@ const MQTTLogs = () => {
       try {
         setIsLoading(true);
         // Fetch all logs
-        const response = await axios.get('https://render-express-deployment-ra5r.onrender.com/api/logs');
+        const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/logs`);
         const allLogs = response.data;
         
         // Distribute logs between nodes
@@ -63,7 +63,7 @@ const MQTTLogs = () => {
     fetchLogs();
     
     // Set up Socket.IO for real-time updates
-    const socket = io('https://render-express-deployment-ra5r.onrender.com');
+    const socket = io(`${process.env.REACT_APP_API_BASE_URL}`);
     
     socket.on('sensor_data', (allLogs) => {
       console.log('Received real-time sensor data update');
@@ -98,7 +98,7 @@ const MQTTLogs = () => {
     });
     
     // Set up fallback periodic refresh
-    const interval = setInterval(fetchLogs, 30000); // Refresh every 30 seconds
+    const interval = setInterval(fetchLogs, 5000); // Refresh every 30 seconds
     
     // Clean up on unmount
     return () => {

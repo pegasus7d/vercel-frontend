@@ -17,7 +17,7 @@ const Login = ({ setLoggedInUser, setShowRegister }) => {
     const onSubmit = async e => {
         e.preventDefault();
         try {
-            const res = await axios.post('https://render-express-deployment-ra5r.onrender.com/api/auth/login', {
+            const res = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/auth/login`, {
                 username,
                 password
             });

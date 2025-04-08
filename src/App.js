@@ -71,7 +71,7 @@ const DownloadTab = () => {
     setIsLoading(true);
     try {
       // Fetch logs from the backend with authentication
-      const response = await axios.get('https://render-express-deployment-ra5r.onrender.com/api/logs', {
+      const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/logs`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
@@ -196,7 +196,7 @@ const ChatbotTab = () => {
     setLoading(true);
     setResponse('');
     try {
-      const res = await axios.get(`https://render-express-deployment-ra5r.onrender.com/api/chatbot/query`, {
+      const res = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/chatbot/query`, {
         params: { node_id: nodeId, query }
       });
       setResponse(res.data.response);
